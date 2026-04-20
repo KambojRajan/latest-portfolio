@@ -50,14 +50,14 @@ export default function HeroScene() {
       {/* Top bar */}
       <div className="absolute top-0 left-0 right-0 h-[3px]" style={{ background: "#3A1C1C" }} />
 
-      {/* Clouds — more scattered and varied */}
+      {/* Clouds — scattered, fewer on mobile */}
       <Cloud className="absolute cloud-float" size={150} style={{ top: "7%", left: "10%", animationDelay: "0s" }} />
       <Cloud className="absolute cloud-float" size={90} style={{ top: "5%", right: "22%", animationDelay: "1.2s" }} />
-      <Cloud className="absolute cloud-float" size={70} style={{ top: "20%", left: "52%", animationDelay: "2.8s" }} />
-      <Cloud className="absolute cloud-float" size={120} style={{ top: "22%", right: "6%", animationDelay: "1.8s" }} />
-      <Cloud className="absolute cloud-float" size={80} style={{ bottom: "30%", left: "3%", animationDelay: "3.2s" }} />
+      <Cloud className="absolute cloud-float hidden sm:block" size={70} style={{ top: "20%", left: "52%", animationDelay: "2.8s" }} />
+      <Cloud className="absolute cloud-float hidden md:block" size={120} style={{ top: "22%", right: "6%", animationDelay: "1.8s" }} />
+      <Cloud className="absolute cloud-float hidden sm:block" size={80} style={{ bottom: "30%", left: "3%", animationDelay: "3.2s" }} />
       <Cloud className="absolute cloud-float" size={100} style={{ bottom: "25%", right: "12%", animationDelay: "0.6s" }} />
-      <Cloud className="absolute cloud-float" size={60} style={{ top: "40%", left: "30%", animationDelay: "4s" }} />
+      <Cloud className="absolute cloud-float hidden lg:block" size={60} style={{ top: "40%", left: "30%", animationDelay: "4s" }} />
 
       {/* Center content */}
       <div className="flex-1 flex flex-col items-center justify-center relative z-10 px-6">
