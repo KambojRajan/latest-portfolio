@@ -312,7 +312,7 @@ function ExpandedMonitor({
                     marginBottom: 8,
                   }}
                 >
-                  // stack
+                  {"// stack"}
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 24 }}>
                   {project.stack.map((s) => (
