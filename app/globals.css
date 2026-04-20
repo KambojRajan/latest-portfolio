@@ -1,0 +1,417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --cream: #FAF5EE;
+    --cream-dark: #F2E8DA;
+    --maroon: #3A1C1C;
+    --maroon-light: #5C3333;
+    --maroon-lighter: #8B6F6F;
+    --maroon-faint: #C4AAAA;
+    --rose: #E85D75;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: var(--cream);
+    color: var(--maroon);
+    overflow: hidden;
+    height: 100vh;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='8' fill='none' stroke='%233A1C1C' stroke-width='1.5'/%3E%3Ccircle cx='10' cy='10' r='2' fill='%233A1C1C'/%3E%3C/svg%3E") 10 10, auto;
+  }
+
+  ::selection {
+    background-color: rgba(232, 93, 117, 0.25);
+    color: var(--maroon);
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+/* ============================================================
+   Horizontal scroll container
+   ============================================================ */
+.scene-scroll {
+  display: flex;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  height: 100vh;
+  width: 100vw;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.scene-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.scene {
+  min-width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ============================================================
+   Typography helpers
+   ============================================================ */
+.mono-label {
+  font-family: var(--font-jetbrains);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--maroon);
+}
+.mono-small {
+  font-family: var(--font-jetbrains);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--maroon-lighter);
+}
+
+/* Dot accent (pink) */
+.dot-accent {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--rose);
+  margin-right: 10px;
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+/* ============================================================
+   ANIMATIONS  — lots of life!
+   ============================================================ */
+
+/* Cloud float — gentle drift */
+@keyframes floatCloud {
+  0%, 100% { transform: translate(0, 0); }
+  25%      { transform: translate(8px, -4px); }
+  50%      { transform: translate(12px, 0); }
+  75%      { transform: translate(4px, 4px); }
+}
+.cloud-float {
+  animation: floatCloud 8s ease-in-out infinite;
+}
+
+/* Dot pulse */
+@keyframes dotPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%      { transform: scale(1.4); opacity: 0.6; }
+}
+
+/* Wobble on hover */
+@keyframes wobble {
+  0%   { transform: rotate(0deg); }
+  15%  { transform: rotate(3deg); }
+  30%  { transform: rotate(-3deg); }
+  45%  { transform: rotate(2deg); }
+  60%  { transform: rotate(-1deg); }
+  75%  { transform: rotate(1deg); }
+  100% { transform: rotate(0deg); }
+}
+.hover-wobble:hover {
+  animation: wobble 0.6s ease-in-out;
+}
+
+/* Bounce in */
+@keyframes bounceIn {
+  0%   { transform: scale(0) translateY(20px); opacity: 0; }
+  60%  { transform: scale(1.08) translateY(-4px); opacity: 1; }
+  80%  { transform: scale(0.96) translateY(1px); }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+/* Float up & down gently */
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.gentle-float {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+/* Steam / smoke from coffee */
+@keyframes steamRise {
+  0%   { opacity: 0; transform: translateY(0) scaleX(1); }
+  30%  { opacity: 0.5; }
+  60%  { opacity: 0.3; transform: translateY(-16px) scaleX(1.3); }
+  100% { opacity: 0; transform: translateY(-30px) scaleX(0.8); }
+}
+.steam-anim {
+  animation: steamRise 2.5s ease-out infinite;
+}
+.steam-anim-delay {
+  animation: steamRise 2.5s ease-out infinite 0.8s;
+}
+.steam-anim-delay2 {
+  animation: steamRise 2.5s ease-out infinite 1.6s;
+}
+
+/* LED blink */
+@keyframes ledBlink {
+  0%, 90%, 100% { opacity: 1; }
+  95%           { opacity: 0.2; }
+}
+.led-blink {
+  animation: ledBlink 3s ease infinite;
+}
+.led-blink-slow {
+  animation: ledBlink 5s ease infinite 1s;
+}
+
+/* Typing cursor */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0; }
+}
+.cursor-blink {
+  animation: cursorBlink 0.9s step-end infinite;
+}
+
+/* Gentle sway (for plant, lamp) */
+@keyframes sway {
+  0%, 100% { transform: rotate(0deg); }
+  25%      { transform: rotate(1.5deg); }
+  75%      { transform: rotate(-1.5deg); }
+}
+.sway {
+  animation: sway 5s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+/* Pop in (for scene items appearing) */
+@keyframes popIn {
+  0%   { transform: scale(0); opacity: 0; }
+  70%  { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  0%   { transform: translateX(-40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  0%   { transform: translateX(40px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Slide up */
+@keyframes slideUp {
+  0%   { transform: translateY(30px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Wiggle (for attention-grabbing) */
+@keyframes wiggle {
+  0%, 100% { transform: translateX(0); }
+  20%      { transform: translateX(-3px); }
+  40%      { transform: translateX(3px); }
+  60%      { transform: translateX(-2px); }
+  80%      { transform: translateX(2px); }
+}
+
+/* Spin slow */
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Scale pulse */
+@keyframes scalePulse {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.05); }
+}
+
+/* Interactive lift on hover */
+.interactive-item {
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s;
+}
+.interactive-item:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: drop-shadow(0 8px 12px rgba(58, 28, 28, 0.1));
+}
+
+/* ============================================================
+   Speech bubble
+   ============================================================ */
+.speech-bubble {
+  position: relative;
+  background: var(--maroon);
+  color: var(--cream);
+  padding: 12px 18px;
+  font-family: var(--font-jetbrains);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.6;
+}
+.speech-bubble::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--maroon);
+}
+
+/* ============================================================
+   Progress bar
+   ============================================================ */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--maroon);
+  z-index: 100;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================
+   Bottom nav
+   ============================================================ */
+.bottom-nav {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--maroon);
+  padding: 8px 12px;
+  border-radius: 24px;
+  box-shadow: 0 6px 24px rgba(58, 28, 28, 0.2);
+}
+.bottom-nav button {
+  color: var(--cream);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s, transform 0.2s;
+  font-family: var(--font-jetbrains);
+  font-size: 0.8rem;
+}
+.bottom-nav button:hover {
+  background: rgba(250, 245, 238, 0.15);
+  transform: scale(1.1);
+}
+.bottom-nav button:active {
+  transform: scale(0.95);
+}
+
+/* ============================================================
+   Tooltip
+   ============================================================ */
+.tooltip-parent { position: relative; }
+.tooltip-parent .tooltip {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9) translateY(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  white-space: nowrap;
+  background: var(--maroon);
+  color: var(--cream);
+  padding: 6px 12px;
+  font-family: var(--font-jetbrains);
+  font-size: 0.55rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.tooltip-parent:hover .tooltip {
+  opacity: 1;
+  transform: translateX(-50%) scale(1) translateY(0);
+}
+
+/* ============================================================
+   Pegboard dots background
+   ============================================================ */
+.pegboard-bg {
+  background-image: radial-gradient(circle, #C4AAAA 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* ============================================================
+   Scrollbar (hidden)
+   ============================================================ */
+::-webkit-scrollbar { width: 0; height: 0; }
+
+/* ============================================================
+   Scene entry animations (applied via JS classes)
+   ============================================================ */
+.scene-enter .anim-item {
+  opacity: 0;
+}
+.scene-active .anim-item {
+  animation: bounceIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+.scene-active .anim-item:nth-child(1) { animation-delay: 0.05s; }
+.scene-active .anim-item:nth-child(2) { animation-delay: 0.12s; }
+.scene-active .anim-item:nth-child(3) { animation-delay: 0.2s; }
+.scene-active .anim-item:nth-child(4) { animation-delay: 0.28s; }
+.scene-active .anim-item:nth-child(5) { animation-delay: 0.35s; }
+.scene-active .anim-item:nth-child(6) { animation-delay: 0.42s; }
+.scene-active .anim-item:nth-child(7) { animation-delay: 0.5s; }
+.scene-active .anim-item:nth-child(8) { animation-delay: 0.58s; }
+.scene-active .anim-item:nth-child(9) { animation-delay: 0.65s; }
+.scene-active .anim-item:nth-child(10) { animation-delay: 0.72s; }
+
+/* ============================================================
+   Opening Door — 3D perspective swing
+   ============================================================ */
+.door-wrapper {
+  perspective: 800px;
+  cursor: pointer;
+}
+.door-panel {
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-style: preserve-3d;
+}
+.door-wrapper:hover .door-panel,
+.door-wrapper.door-open .door-panel {
+  transform: rotateY(-75deg);
+}
+
+@keyframes doorReveal {
+  0%   { opacity: 0; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.door-inside-content {
+  opacity: 0;
+  transition: opacity 0.4s ease 0.3s;
+}
+.door-wrapper:hover .door-inside-content,
+.door-wrapper.door-open .door-inside-content {
+  opacity: 1;
+}
